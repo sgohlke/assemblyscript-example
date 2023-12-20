@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script type="module">
+import { add, createPerson, randomNumber, randomNumbers } from "./build/release.js";
+
+function generateRandomNumber() {
+  const randomNumber = Math.random() * 6
+  //console.log('Random number is', randomNumber);
+  return Math.ceil(randomNumber);
+}
+
+function generateRandomNumbersJS(numberOfRandomNumbers) {
+  console.log(`JS start generating ${numberOfRandomNumbers} random numbers.`)
+
+  const resultArray = []
+  for (let index = 0; index < numberOfRandomNumbers; index++) {
+    resultArray[index] = generateRandomNumber();
+  }
+  console.log(`JS finished generating ${numberOfRandomNumbers} random numbers.`)
+  return resultArray;
+}
+
+function generateRandomNumbers(numberOfRandomNumbers) {
+  console.log(`JS start generating ${numberOfRandomNumbers} random numbers.`)
+  for (let index = 0; index < numberOfRandomNumbers; index++) {
+    generateRandomNumber();
+  }
+  console.log(`JS finished generating ${numberOfRandomNumbers} random numbers.`)
+
+  console.log(`WASM start generating ${numberOfRandomNumbers} random numbers.`)
+  for (let index = 0; index < numberOfRandomNumbers; index++) {
+    randomNumber();
+  }
+  console.log(`WASM finished generating ${numberOfRandomNumbers} random numbers.`)
+
+}
+
+generateRandomNumbers(4000)
+
+console.log('Generate person: ', createPerson() )
+
+document.body.innerText = 'Addition is ' + add(1, 4);
+</script>
+</head>
+<body></body>
+</html>
